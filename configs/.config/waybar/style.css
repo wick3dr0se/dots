@@ -1,0 +1,48 @@
+* {
+    font-family: "Font Awesome 5 Free";
+}
+
+window#waybar {
+    background-color: transparent;
+}
+
+#network,
+#wireplumber,
+#disk,
+#cpu,
+#clock {
+    margin: 0 4px;
+    padding: 0 8px;
+    border-radius: 12px;
+    color: #45475A;
+}
+
+#network {
+    background-color: #F5C2E7; /* magenta */
+}
+
+#bluetooth {
+    padding: 0 4px;
+    background-color: #89B4FA; /* blue */
+}
+
+#wireplumber {
+    background-color: #94E2D5; /* cyan */
+}
+
+#disk {
+    background-color: #F38BA8; /* red */
+}
+
+#memory {
+    padding: 0 8px;
+    background-color: #F9E2AF; /* green */
+}
+
+#cpu {
+    background-color: #A6E3A1; /* yellow */
+}
+
+#clock {
+    background-color: #B4BEFE; /* lavender */
+}

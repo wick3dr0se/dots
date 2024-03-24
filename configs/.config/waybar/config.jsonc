@@ -1,0 +1,7 @@
+{
+    "layer": "top",
+    "modules-left": ["network", "bluetooth", "wireplumber"],
+    "modules-center": ["disk", "memory", "cpu"],
+    "modules-right": ["clock"],
+    "include": ["$HOME/.config/waybar/modules.jsonc"]
+}
