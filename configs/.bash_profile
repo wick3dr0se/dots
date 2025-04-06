@@ -1,6 +1,6 @@
 # ~/.bash_profile
 
-EDITOR='vim'
+export EDITOR='vim'
 
 [[ -f $HOME/.bashrc ]]&& . ~/.bashrc
 
