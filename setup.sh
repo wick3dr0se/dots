@@ -5,22 +5,8 @@ is_yes_reply() {
     [[ ${REPLY,,} =~ ^y(es)?$ ]]
 }
 
-get_bin_dependencies() {
-    local binPrograms=(
-        'hyprpaper-rand'
-        'pactl-vol'
-        'hypr-reload'
-    )
-    local binPath="$HOME/.local/bin"
-
-    [[ -d $binPath ]]|| mkdir "$binPath"
-
-    echo 'Getting executable dependencies...'
-
-    for p in "${binPrograms[@]}"; do
-        echo "Installing $p to $binPath..."
-        curl -sLo "$binPath/$p" "https://github.com/wick3dr0se/bin/raw/main/$p"
-    done
+git_get() {
+    curl -sLo "$3" "https://github.com/wick3dr0se/$1/raw/main/$2"
 }
 
 copy_configurations() {
@@ -38,5 +24,44 @@ copy_configurations() {
     done
 }
 
-get_bin_dependencies
+get_bin_dependencies() {
+    local binPrograms=(
+        'hyprpaper-rand'
+        'pactl-vol'
+        'hypr-reload'
+        'grimcap'
+    )
+    local binPath="$HOME/.local/bin"
+
+    [[ -d $binPath ]]|| mkdir "$binPath"
+
+    echo 'Getting executable dependencies...'
+
+    for p in "${binPrograms[@]}"; do
+        if [[ $p == 'grimcap' ]]; then
+            repo="$p"
+        else
+            repo="bin"
+        fi
+
+        echo "Installing $p to $binPath..."
+        git_get "$repo" "$p" "$binPath/$p"
+    done
+
+    chmod +x "$binPath/"*
+    
+    "$binPath/hypr-reload"
+    sleep .5
+    "$binPath/hyprpaper-rand"
+}
+
+set_shell_prompt() {
+    local p='bashrc'
+
+    echo "Setting shell prompt..."
+    git_get "$p" ".$p" "$HOME/.$p"
+}
+
 copy_configurations
+get_bin_dependencies
+set_shell_prompt
