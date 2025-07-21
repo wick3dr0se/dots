@@ -1,0 +1,7 @@
+firefox
+foot
+fuzzel
+niri
+quickshell
+vim
+xdg-desktop-portal-kde

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+LOGFILE="/tmp/hypr-session.log"
+
+[[ ! $WAYLAND_DISPLAY && $(tty) == /dev/tty1 ]] && {
+    exec Hyprland 2>&1 | tee "$LOGFILE"
+}

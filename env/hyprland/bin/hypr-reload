@@ -1,0 +1,11 @@
+#!/bin/bash
+
+killall waybar dunst hyprpaper
+
+waybar >/dev/null &
+
+dunst &
+
+hyprctl reload
+
+hyprpaper --config ~/.config/hypr/hyprpaper.conf &

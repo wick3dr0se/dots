@@ -1,0 +1,7 @@
+firefox
+kitty
+wofi
+dunst
+hyprland
+vim
+waybar

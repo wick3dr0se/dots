@@ -1,0 +1,18 @@
+[alias]
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+    amend = commit --amend --no-edit
+    changes = diff --staged
+    cleanup = fetch --prune
+    current = rev-parse --abbrev-ref HEAD
+    files = ls-files
+    info = status -sb
+    undo = reset --soft HEAD~1
+    undo-fr = reset --hard HEAD~1
+[color]
+    diff = auto
+    status = auto
+    branch = auto
