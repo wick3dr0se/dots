@@ -7,7 +7,7 @@ environment {
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
     OZONE_PLATFORM "wayland"
     GDK_BACKEND "wayland"
-    QT_QPA_PLATFORM "wayland-egl"
+    QT_QPA_PLATFORM "wayland"
     XDG_SESSION_TYPE "wayland"
     MOZ_ENABLE_WAYLAND "1"
     _JAVA_AWT_WM_NONREPARENTING "1"
@@ -15,7 +15,6 @@ environment {
     WINDOW_MANAGER "niri"
     SDL_VIDEODRIVER "wayland"
     CLUTTER_BACKEND "wayland"
-
 }
 
 // Input device configuration.
@@ -277,7 +276,7 @@ layout {
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
@@ -361,7 +360,8 @@ binds {
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // New binds
-    Mod+W hotkey-overlay-title="Open Browser: Firefox" { spawn "firefox"; }
+    Mod+W hotkey-overlay-title="Open Browser: Floorp" { spawn "floorp"; }
+    Mod+V hotkey-overlay-title="Open Visual Editor: VSCode" { spawn "code"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -562,8 +562,8 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+Space       { toggle-window-floating; }
+    Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
