@@ -13,12 +13,14 @@ dots/
 │ ├── [hyprland](env/hyprland/)/  
 │ │ ├── bin/ - Scripts only used for Hyprland  
 │ │ ├── config)/ - Hyprland-specific configs (waybar, wofi)  
-│ │ └── packages.txt) - Packages used with Hyprland  
+│ │ └── packages.txt) - Packages used with Hyprland (executed by `install.sh`)  
 │ └── [niri](env/niri/)/  
 │ │ ├── bin/ - Scripts only used for Niri  
 │ │ ├── config/ - Niri-specific configs (niri, quickshell)  
 │ │ └── packages.txt - Packages used with Niri  
 ├── [home](home/)/ - Common files to symlink/copy into ~/  
+├── bootstrap_packags - Common bootstrap packages (executed by `bootstrap.sh`)  
+├── bootstrap.sh - System bootstrap script (Chaotic AUR, paru, base packages) for fresh installs  
 └── install.sh - Main setup script (links/copies files, installs packages, ..)
 
 ## Environment Specific Configurations

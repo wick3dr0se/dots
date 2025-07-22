@@ -21,6 +21,10 @@ env=
 install_mode=
 overwrite_mode=
 
+_prompt_yes_no() { read -rp "$1 [y/N]: "; [[ "$REPLY" =~ ^[yY]$ ]]; }
+
+_info()  { printf '\e[1;32m[INFO]\e[m %s\n' "$*"; }
+
 set_environment() {
     read -rp 'Choose env [niri/hyprland]: '
     env="env/${REPLY,,}"
@@ -28,6 +32,8 @@ set_environment() {
     [[ ${env#env/} =~ ^niri$|^hyprland$ ]] || {
         printf 'Unknown env: %s\n' "$env" >&2; exit 1
     }
+
+    _info "Environment set to: ${env#env/}"
 }
 
 should_overwrite() {
@@ -38,6 +44,8 @@ should_overwrite() {
         yes) return;;
         no) return 1;;
     esac
+
+    _info "Install mode: $install_mode, Overwrite: $overwrite_mode"
 }
 
 select_install_mode() {
@@ -88,6 +96,8 @@ install_file() {
 install_dotfiles() {
     local dot
 
+    _info "Installing dotfiles..."
+
     mkdir -p "$HOME/.config"
     for dot in home/.* config/* "$env/config/"*; do
         case $dot in
@@ -100,6 +110,8 @@ install_dotfiles() {
 install_scripts() {
     local script
     
+    _info "Installing scripts..."
+
     mkdir -p "$HOME/.local/bin"
     for script in "$env/bin/"*; do
         install_file "$script" "$HOME/.local/${script#"$env"/}"
@@ -111,12 +123,11 @@ install_packages() {
 
     [[ -f $pkg_file ]] || return
 
-    read -rp "Install packages from $pkg_file? [y/N]: "
-    [[ ${REPLY,,} != y ]] && return
+    _info "Installing packages from $pkg_file"
 
     if command -v pacman &>/dev/null; then
         # shellcheck disable=SC2046
-        sudo pacman -S --needed --noconfirm $(<"$pkg_file")
+        sudo pacman -Syu --needed $(<"$pkg_file")
     else
         printf 'No supported package manager found.\n' >&2
     fi
@@ -131,3 +142,5 @@ install_scripts
 printf 'Dotfiles installed for "%s" using "%s" mode\n' "$env" "$install_mode"
 
 install_packages
+
+_prompt_yes_no 'Run system bootstrap script?' && bash bootstrap.sh
