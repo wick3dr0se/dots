@@ -60,8 +60,11 @@ select_install_mode() {
 install_file() {
     local src="$1" dst="$2" backup
 
-    # skip if symlink matches or copy destination is newer
-    [[ $install_mode == link && -h $dst && $(readlink "$dst") == "$src" ]] ||
+    # make sure src is absolute
+    [[ $src != /* ]] && src="$PWD/$src"
+
+    # skip if symlink exists or copy destination is newer
+    [[ $install_mode == link && -h $dst ]] ||
         [[ $install_mode == copy && -e $dst && $dst -nt $src ]] && return
 
     # file or symlink exists
@@ -88,12 +91,7 @@ install_dotfiles() {
     mkdir -p "$HOME/.config"
     for dot in home/.* config/* "$env/config/"*; do
         case $dot in
-            home/*)
-                install_file "$dot" "$HOME/${dot#home/}"
-
-                # shellcheck disable=SC1090
-                [[ ${dot#home/.} == bash* ]] && . "$HOME/${dot#home/}"
-            ;;
+            home/*) install_file "$dot" "$HOME/${dot#home/}";;
             *) install_file "$dot" "$HOME/.${dot#"$env"/}";;
         esac
     done
