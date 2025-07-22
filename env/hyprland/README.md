@@ -1,6 +1,6 @@
 <div align="center">
 <h1>⚫ dots - Hyprland</h1>
-<p>My minimalist Arch Linux dotfile configs for Hyprland</p>
+<p>My minimalist dotfile configs for Hyprland</p>
 <a href='#'><img src="https://img.shields.io/badge/Hyprland-dotfiles-_?style=flat-square&labelColor=232329&color=ffbc00&logo=wayland"/></a>
 <a href='#'><img src="https://img.shields.io/badge/Maintained%3F-Yes-green.svg?style=flat-square&labelColor=232329&color=5277C3"></img></a>
 <a href="https://discord.gg/W4mQqNnfSq">
@@ -75,4 +75,4 @@ Cmd | Key | Desc
 `grimcap rec active` | <kbd>Ctrl</kbd>+<kbd>Pause</kbd> | record active window
 `grimcap rec area` | <kbd>Shift</kbd>+<kbd>Pause</kbd> | record selection area
 
-For worksapce bindings see: https://github.com/wick3dr0se/dots/blob/main/.config/hypr/hyprland/workspace.conf
+For worksapce bindings see: [workspace.conf](config/hypr/hyprland/workspace.conf)

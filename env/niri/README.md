@@ -1,6 +1,6 @@
 <div align="center">
 <h1>⚫ dots – Niri</h1>
-<p>My minimalist Arch Linux dotfile configs for Niri</p>
+<p>My minimalist dotfile configs for Niri</p>
 <a href='#'><img src="https://img.shields.io/badge/Niri-dotfiles-_?style=flat-square&labelColor=232329&color=ffbc00&logo=wayland"/></a>
 <a href='#'><img src="https://img.shields.io/badge/Maintained%3F-Yes-green.svg?style=flat-square&labelColor=232329&color=5277C3"></img></a>
 <a href="https://opensourceforce.net/discord">
