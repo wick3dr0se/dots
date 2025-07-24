@@ -87,5 +87,10 @@ PS1="\[$userColor\]\$USER\[\e[m\]@\[$orange\]\$HOSTNAME\[\e[m\] \
 # debugging trace prompt
 PS4="-[\e[33m${BASH_SOURCE[0]%.sh}\e[m: \e[32m$LINENO\e[m] ${FUNCNAME:+${FUNCNAME[0]}(): }"
 
-# https://github.com/akinomyoga/ble.sh#quick-instructions
-[[ -f ~/.local/share/blesh/ble.sh ]] && . ~/.local/share/blesh/ble.sh
+if [[ -f ~/.local/share/blesh/ble.sh ]]; then
+    . ~/.local/share/blesh/ble.sh
+elif [[ -f /usr/share/blesh/ble.sh ]]; then
+    . /usr/share/blesh/ble.sh
+fi
+
+bleopt color_scheme=catppuccin_mocha
