@@ -2,9 +2,6 @@
 
 set -euo pipefail
 
-# MAKE PARU INSTALL FROM CHAOTIC IF INSTALLED
-# ADD MESSAGES
-
 chaotic_aur_installed=0
 paru_installed=0
 blesh_installed=0
