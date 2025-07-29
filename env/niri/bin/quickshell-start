@@ -1,9 +1,0 @@
-#!/bin/bash
-
-export QT_DEBUG_PLUGINS=1
-export QT_PLUGIN_PATH=/usr/lib/qt6/plugins      # adjust if Qt5 → /usr/lib/qt/plugins
-export PATH=/usr/local/bin:/usr/bin:/bin
-
-cd ~/.config/quickshell || return # fixes our cwd issues with niri launching quickshell
-exec quickshell -c qml "$@"
-
