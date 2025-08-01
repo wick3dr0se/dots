@@ -59,33 +59,22 @@ mkcd() {
 }
 
 prompt_command() {
-    local branch tag
+    local last_cmd title branch tag
 
-    # overwrite /home/$USER to ~/ in $PWD (safe)
     [[ $PWD =~ ^$HOME ]]&& { PWD=${PWD#"$HOME"} PWD=~$PWD; } 
+
+    last_cmd=$(HISTTIMEFORMAT='' history 1 | sed 's/^ *[0-9]* *//')
+    title="${PWD##*/}"
+    [[ $last_cmd ]] && title+=": ${last_cmd:0:50}"
+    printf '\e]0;%s - foot\e' "$title"
+    
     printf '%b%s\e[m' "$orange" "$PWD"
 
-    # git branch/tag
     branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     tag=$(git describe --tags --abbrev=0 2>/dev/null)
-
-    [[ $branch ]] && printf ' \e[2m%s\e[m %b\e[m \e[2m%s\e[m' "$branch" "$gitRed" "$tag"
+    [[ $branch ]] && printf ' \e[2m%s\e[m %b\e[m \e[2m%s\e[m' "$branch" "$gitRed" "$tag"
     printf '\n'
 }
-
-if (( EUID == 0 )); then
-    userSymbol='#' userColor=$amber
-else
-    userSymbol='$' userColor=$phosphorGreen
-fi
-
-PS1="\[$userColor\]\$USER\[\e[m\]@\[$orange\]\$HOSTNAME\[\e[m\] \
-\$((( \$? ))\
-  && printf '\[$amber\]$userSymbol\[\e[m\]> '\
-  || printf '\[$phosphorGreen\]$userSymbol\[\e[m\]> ')"
-
-# debugging trace prompt
-PS4="-[\e[33m${BASH_SOURCE[0]%.sh}\e[m: \e[32m$LINENO\e[m] ${FUNCNAME:+${FUNCNAME[0]}(): }"
 
 if [[ -f ~/.local/share/blesh/ble.sh ]]; then
     . ~/.local/share/blesh/ble.sh
@@ -94,3 +83,16 @@ elif [[ -f /usr/share/blesh/ble.sh ]]; then
 fi
 
 bleopt color_scheme=catppuccin_mocha
+
+if (( EUID == 0 )); then
+    userSymbol='#' userColor=$amber
+else
+    userSymbol='$' userColor=$phosphorGreen
+fi
+
+PS1="\[$userColor\]\$USER\[\e[m\]@\[$orange\]\$HOSTNAME\[\e[m\] \$((( \$? ))\
+    && printf '\[$amber\]$userSymbol\[\e[m\]> '\
+    || printf '\[$phosphorGreen\]$userSymbol\[\e[m\]> ')"
+
+# debugging trace prompt
+PS4="-[\e[33m${BASH_SOURCE[0]%.sh}\e[m: \e[32m$LINENO\e[m] ${FUNCNAME:+${FUNCNAME[0]}(): }"
