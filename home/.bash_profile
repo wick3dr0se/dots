@@ -2,7 +2,7 @@
 
 set -a # export all
 # shell specific envs
-PATH="$PATH:~/bin:~/.local/bin:~/.cargo/bin"
+PATH="$PATH:~/bin:~/.local/bin:~/.cargo/bin:/usr/lib/qt6/bin"
 EDITOR=/usr/bin/vim
 VISUAL=/usr/bin/code
 
