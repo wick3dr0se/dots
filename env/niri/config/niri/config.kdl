@@ -271,7 +271,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "qs-start"
+spawn-at-startup "~/.local/bin/qs-start"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -363,7 +363,7 @@ binds {
 
     // New binds
     Mod+W hotkey-overlay-title="Open Browser: Librewolf" { spawn "librewolf"; }
-    Mod+V hotkey-overlay-title="Open Visual Editor: VSCode" { spawn "code"; }
+    Mod+V hotkey-overlay-title="Open Visual Editor: VSCodium" { spawn "codium"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
