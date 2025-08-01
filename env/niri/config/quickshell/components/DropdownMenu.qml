@@ -117,7 +117,8 @@ PopupWindow {
                     onClicked: {
                         dropdown.visible = false
                         console.log("Lock screen clicked")
-                        // Process { command: ["swaylock"] }
+                        lockscreen.targetWindow = parentWindow
+                        lockscreen.lockScreen()
                     }
                 }
             }
@@ -158,17 +159,27 @@ PopupWindow {
                     onClicked: {
                         dropdown.visible = false
                         console.log("Power off clicked")
-                        // Process { command: ["systemctl", "poweroff"] }
+                        powerOffProcess.running = true
                     }
                 }
             }
         }
     }
 
+    Lockscreen {
+        id: lockscreen
+    }
+
+    Process {
+        id: powerOffProcess
+        command: ["systemctl", "poweroff"]
+        running: false
+    }
+
     // simple auto-hide timer
     Timer {
         id: autoHideTimer
-        interval: 2000
+        interval: 3000
         running: dropdown.visible
         onTriggered: {
             dropdown.visible = false
