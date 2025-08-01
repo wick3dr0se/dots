@@ -1,3 +1,5 @@
 iwd
 pipewire
 wireplumber
+bluez
+bluez-utils

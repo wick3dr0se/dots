@@ -96,8 +96,13 @@ EOF"
 }
 
 setup_audio() {
-    _info "Enabling PipeWire + WirePlumber"
+    _info "Enabling audio (PipeWire + WirePlumber)"
     systemctl --user enable --now pipewire wireplumber
+}
+
+setup_bluetooth() {
+    _info "Enabling bluetooth (bluez)"
+    sudo systemctl enable --now bluetooth
 }
 
 check_tools
@@ -109,5 +114,6 @@ _prompt_yes_no 'Install ble.sh (Bash suggestions & completions)?' && install_ble
 
 _prompt_yes_no 'Enable autologin on TTY1?' && setup_autologin
 _prompt_yes_no 'Enable PipeWire + WirePlumber audio services?' && setup_audio
+_prompt_yes_no 'Enable bluez bluetooth service?' && setup_bluetooth
 
 _info "Done bootstrapping!"
