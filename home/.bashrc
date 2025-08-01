@@ -76,6 +76,8 @@ prompt_command() {
     printf '\n'
 }
 
+[[ -f ~/.bash_config.d/functions ]] && . ~/.bash_config.d/functions
+[[ -f ~/.bash_config.d/aliases ]] && . ~/.bash_config.d/aliases
 if [[ -f ~/.local/share/blesh/ble.sh ]]; then
     . ~/.local/share/blesh/ble.sh
 elif [[ -f /usr/share/blesh/ble.sh ]]; then
@@ -84,10 +86,10 @@ fi
 
 bleopt color_scheme=catppuccin_mocha
 
-if (( EUID == 0 )); then
-    userSymbol='#' userColor=$amber
-else
+if (( EUID )); then
     userSymbol='$' userColor=$phosphorGreen
+else
+    userSymbol='#' userColor=$amber
 fi
 
 PS1="\[$userColor\]\$USER\[\e[m\]@\[$orange\]\$HOSTNAME\[\e[m\] \$((( \$? ))\

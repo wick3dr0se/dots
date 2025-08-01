@@ -6,7 +6,8 @@ PATH="$PATH:~/bin:~/.local/bin:~/.cargo/bin"
 EDITOR=/usr/bin/vim
 VISUAL=/usr/bin/code
 
-[[ -f ~/.bash_env ]] && . ~/.bash_env
+[[ -f ~/.bash_config.d/env ]] && . ~/.bash_config.d/env
+
 set +a
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
