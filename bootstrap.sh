@@ -26,19 +26,19 @@ install_chaotic_aur() {
     local key='3056513887B78AEB' cdn='https://cdn-mirror.chaotic.cx/chaotic-aur'
 
     # https://aur.chaotic.cx/docs
-    pacman-key --recv-key "$key" --keyserver keyserver.ubuntu.com
-    pacman-key --lsign-key "$key"
-    pacman --noconfirm -U "$cdn/chaotic-keyring.pkg.tar.zst"
-    pacman --noconfirm -U "$cdn/chaotic-mirrorlist.pkg.tar.zst"
+    sudo pacman-key --recv-key "$key" --keyserver keyserver.ubuntu.com
+    sudo pacman-key --lsign-key "$key"
+    sudo pacman --noconfirm -U "$cdn/chaotic-keyring.pkg.tar.zst"
+    sudo pacman --noconfirm -U "$cdn/chaotic-mirrorlist.pkg.tar.zst"
 
-    cat <<EOF >>/etc/pacman.conf
+    sudo bash -c 'cat <<EOF >>/etc/pacman.conf
 
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
-EOF
+EOF'
 
     _info "Chaotic AUR installed. Updating packages..."
-    pacman -Syu
+    sudo pacman -Syu
 }
 
 
@@ -67,10 +67,10 @@ install_blesh() {
     (( blesh_installed )) && return
     _info "Installing ble.sh"
 
-    if (( chaotic_aur_installed )); then
-        sudo pacman -S --needed blesh
-    elif (( paru_installed )); then
-        paru -S --needed blesh
+    if (( paru_installed )); then
+        paru -S --needed blesh-git
+    elif (( chaotic_aur_installed )); then
+        sudo pacman -S --needed blesh-git
     else
         _info "Building ble.sh manually"
         # https://github.com/akinomyoga/ble.sh#quick-instructions
@@ -86,12 +86,13 @@ setup_autologin() {
 
     local conf='/etc/systemd/system/getty@tty1.service.d/autologin.conf'
     
-    mkdir -p "${conf%/*}"
-    cat <<EOF >"$conf"
+    sudo mkdir -p "${conf%/*}"
+    echo "${conf%/*}"
+    sudo bash -c "cat <<EOF >$conf
 [Service]
 ExecStart=
-ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin $USER %I $TERM
-EOF
+ExecStart=-/sbin/agetty -o '-p -f -- \\\\u' --noclear --autologin $USER %I \$TERM
+EOF"
 }
 
 setup_audio() {
