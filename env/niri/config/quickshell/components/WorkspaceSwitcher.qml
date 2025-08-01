@@ -14,7 +14,7 @@ Row {
         Rectangle {
             id: pill
 
-            color: model.isFocused ? config.theme?.green : config.theme?.crust
+            color: model.isFocused ? config.theme?.success : config.theme?.base_deep
             height: 20
             radius: height / 2
             width: 35
@@ -23,7 +23,7 @@ Row {
                 id: label
 
                 anchors.centerIn: parent
-                color: model.isFocused ? config.theme?.crust : config.theme?.text
+                color: model.isFocused ? config.theme?.base_deep : config.theme?.text
                 font.bold: model.isFocused
                 text: model.name.length > 0 ? model.name : model.idx
             }

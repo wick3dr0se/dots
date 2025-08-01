@@ -13,6 +13,7 @@ Text {
     }
 
     color: config?.theme?.text || "white"
+    font.pixelSize: config.panel?.font_size || 12
 
     Component.onCompleted: updateClock()
 
