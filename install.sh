@@ -109,7 +109,7 @@ install_dotfiles() {
 
 install_scripts() {
     local script
-    
+
     _info "Installing scripts..."
 
     mkdir -p "$HOME/.local/bin"
@@ -141,6 +141,6 @@ install_scripts
 
 printf 'Dotfiles installed for "%s" using "%s" mode\n' "$env" "$install_mode"
 
-install_packages
-
 _prompt_yes_no 'Run system bootstrap script?' && bash bootstrap.sh
+
+install_packages
