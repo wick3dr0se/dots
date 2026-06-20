@@ -4,7 +4,8 @@ set -a # export all
 # shell specific envs
 PATH="$PATH:~/bin:~/.local/bin:~/.cargo/bin:/usr/lib/qt6/bin"
 EDITOR=/usr/bin/vim
-VISUAL=/usr/bin/code
+VISUAL=/usr/bin/zeditor
+BROWSER=zen-browser
 
 [[ -f ~/.bash_config.d/env ]] && . ~/.bash_config.d/env
 

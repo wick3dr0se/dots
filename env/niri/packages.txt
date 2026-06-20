@@ -1,8 +1,6 @@
-foot
-fuzzel
 niri
 vim
 xdg-desktop-portal-kde
-quickshell
-vscodium
-librewolf
+noctalia-shell
+zen
+zed
